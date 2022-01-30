@@ -7,6 +7,9 @@ export class EngineBase {
      */
     name;
 
+    /**
+     * @param {String} name Engine Name
+     */
     constructor(name)
     {
         if(!name)

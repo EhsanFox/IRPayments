@@ -18,7 +18,7 @@ import * as TransCodes from "./TransactionCodes.json";
  * @typedef IDPayHeader
  * @type {Object}
  * @property {String} X-API-KEY - IDPay API Key
- * @property {String} 
+ * @property {String} X-SANDBOX - Send Request as a SandBox
  */
 
 export class IDPayEngine extends EngineBase {
@@ -45,12 +45,14 @@ export class IDPayEngine extends EngineBase {
 
     /**
      * @param {String} token  IDPay API Token
+     * @param {String} name Name of the Engine
      */
-    constructor(token)
+    constructor(token, name = "")
     {
         if(!token || token == '' || token == ' ')
             throw new Error('Token is invalid.');
 
+        super(name);
         this.#Token = token;
 
         /**
