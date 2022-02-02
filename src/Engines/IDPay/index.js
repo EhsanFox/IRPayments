@@ -49,12 +49,13 @@ export class IDPayEngine extends EngineBase {
      */
     constructor(token, name = "")
     {
-        if(!token || token == '' || token == ' ')
+        if(!token || typeof token !== 'string' || token == '' || token == ' ')
             throw new Error('Token is invalid.');
 
         super(name);
         this.#Token = token;
-
+        this.#Request = new RequestHandler(`https://api.idpay.ir/${this.Version}`);
+        
         /**
          * @param {Boolean} sandbox Enable Sandbox or not
          * @returns {IDPayHeader}
