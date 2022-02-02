@@ -20,7 +20,12 @@ const TransCodes = require("./TransactionCodes.json");
  * @property {String} X-SANDBOX - Send Request as a SandBox
  */
 
-module.exports = class IDPayEngine {
+/**
+ * @class
+ * @classdesc IDPay Engine Class
+ * Create a Connection between IDPay Gateway
+ */
+class IDPayEngine {
 
     /**
      * Token String for Payments
@@ -228,3 +233,5 @@ module.exports = class IDPayEngine {
         return this.Errors[statusCode][errorCode];
     }
 }
+
+module.exports = IDPayEngine;

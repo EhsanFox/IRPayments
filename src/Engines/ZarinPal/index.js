@@ -10,7 +10,12 @@ const ErrorCodes = require("./Errors.json");
  * @property {Boolean} sandbox - Turn this Action as a Sandbox
  */
 
-module.exports = class ZarinpalEngine {
+/**
+ * @class
+ * @classdesc ZarinPal Engine Class
+ * Create a Connection between ZarinPal Gateway
+ */
+class ZarinpalEngine {
 
     /**
      * Token String for Payments
@@ -157,3 +162,5 @@ module.exports = class ZarinpalEngine {
         return this.Errors[statusCode];
     }
 }
+
+module.exports = ZarinpalEngine;
