@@ -4,7 +4,9 @@
   "type": "module",
   "description": "IR Payments, a package for all payment gateways of IRAN",
   "main": "src/index.js",
-  "scripts": {},
+  "scripts": {
+    "build-docs": "node_modules/.bin/jsdoc --configure jsdoc.json --verbose"
+  },
   "keywords": [
     "payments",
     "pay",

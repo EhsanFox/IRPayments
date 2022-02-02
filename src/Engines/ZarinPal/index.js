@@ -55,7 +55,7 @@ export class ZarinpalEngine extends EngineBase {
          * @param {OptionalParams} options Some optional stuff
          * @returns {Promise<any>} Whatver the axios would return
          */
-        this.CreatePayment = (amount, callbackURL, options = { sandbox = false }) => {
+        this.CreatePayment = (amount, callbackURL, options = { sandbox: false }) => {
             
             if(!amount || typeof amount !== 'number' || amount < 1000)
                 throw new Error(`Amount is invalid.`);
