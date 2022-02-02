@@ -83,7 +83,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">IRPayments Documents</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="3921841" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="EngineBase_EngineBase.html">EngineBase</a></li><li class="accordion-list" id=""><a href="IDPayEngine_IDPayEngine.html">IDPayEngine</a></li><li class="accordion collapsed child" id=6207009><div class="accordion-heading child"><a href="RequestHandler.html">RequestHandler</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="RequestHandler.html#send">send</a></li></ul></li></ul> </div><div class="accordion collapsed" id="158097" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#IDPayHeader">IDPayHeader</a></li><li class="accordion-list" id=""><a href="global.html#OptionalParams">OptionalParams</a></li><li class="accordion-list" id=""><a href="global.html#PaymentParams">PaymentParams</a></li><li class="accordion-list" id=""><a href="global.html#ReqParams">ReqParams</a></li></ul> </div><ul><li class="menu-li"><a href='https://npmjs.com/package/irpayments' class=' menu-link' id='' target='_blank'>NPM Package</a></li><li class="menu-li"><a href='https://github.com/EhsanFox/IRPayments' class=' menu-link' id='' target='_blank'>Github</a></li><li class="menu-li"><a href='https://ehsan.js.org/' class=' menu-link' id='' target='_blank'>Ehsan's Website</a></li></ul>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">IRPayments Documents</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="1860967" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=400227><div class="accordion-heading child"><a href="module.exports.html">exports</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module.exports.html#CreatePayment">CreatePayment</a></li><li data-type='method'><a href="module.exports.html#CreatePayment">CreatePayment</a></li><li data-type='method'><a href="module.exports.html#GetError">GetError</a></li><li data-type='method'><a href="module.exports.html#GetError">GetError</a></li><li data-type='method'><a href="module.exports.html#GetMessage">GetMessage</a></li><li data-type='method'><a href="module.exports.html#PaymentStatus">PaymentStatus</a></li><li data-type='method'><a href="module.exports.html#RefreshAuth">RefreshAuth</a></li><li data-type='method'><a href="module.exports.html#send">send</a></li><li data-type='method'><a href="module.exports.html#Transactions">Transactions</a></li><li data-type='method'><a href="module.exports.html#Transactions">Transactions</a></li><li data-type='method'><a href="module.exports.html#VerifyPayment">VerifyPayment</a></li><li data-type='method'><a href="module.exports.html#VerifyPayment">VerifyPayment</a></li></ul></li><li class="accordion-list" id=""><a href="module.exports_module.exports.html">exports</a></li></ul> </div><div class="accordion collapsed" id="855256" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#IDPayHeader">IDPayHeader</a></li><li class="accordion-list" id=""><a href="global.html#OptionalParams">OptionalParams</a></li><li class="accordion-list" id=""><a href="global.html#PaymentParams">PaymentParams</a></li><li class="accordion-list" id=""><a href="global.html#ReqParams">ReqParams</a></li></ul> </div><ul><li class="menu-li"><a href='https://npmjs.com/package/irpayments' class=' menu-link' id='' target='_blank'>NPM Package</a></li><li class="menu-li"><a href='https://github.com/EhsanFox/IRPayments' class=' menu-link' id='' target='_blank'>Github</a></li><li class="menu-li"><a href='https://ehsan.js.org/' class=' menu-link' id='' target='_blank'>Ehsan's Website</a></li></ul>
       
 
     </nav>
@@ -109,9 +109,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { EngineBase } from "../../Structers/EngineBase.js";
-import { RequestHandler } from "../../Structers/Request.js";
-import * as ErrorCodes from "./Errors.json";
+            <pre class="prettyprint source linenums"><code>const RequestHandler = require("../../Structers/Request");
+const ErrorCodes = require("./Errors.json");
 
 /**
  * @typedef OptionalParams
@@ -122,7 +121,7 @@ import * as ErrorCodes from "./Errors.json";
  * @property {Boolean} sandbox - Turn this Action as a Sandbox
  */
 
-export class ZarinpalEngine extends EngineBase {
+module.exports = class ZarinpalEngine {
 
     /**
      * Token String for Payments
@@ -140,125 +139,133 @@ export class ZarinpalEngine extends EngineBase {
         sandbox: new RequestHandler("https://sandbox.zarinpal.com/pg/rest/WebGate/")
     };
 
-    constructor(token, name = '')
+    /**
+    * All Error Codes and Their Meaning
+    */
+    Errors = ErrorCodes;
+
+    /**
+     * @param {String} token API-Token of ZarinPal (Must be 36 Chars)
+     */
+    constructor(token)
     {
         if(!token || typeof token !== 'string' || token == '' || token == ' ' || token.length &lt; 36)
             throw new Error('Token is invalid.');
 
-        super(name);
-
         this.#Token = token;
+    }
 
-        /**
-         * Get the Base Object for Sending Request
-         */
-        this.GetHeader = () => {
-            let res = {
-                MerchantID: this.#Token
-            };
-            return res;
-        }
+    /**
+    * Get the Base Object for Sending Request
+    * @private
+    */
+    #GetHeader()
+    {
+        let res = {
+            MerchantID: this.#Token
+        };
+        return res;
+    }
 
-        /**
-         * Create a Payment
-         * @param {Number} amount Money Amount that you want in Tomans
-         * @param {String} callbackURL an URL that the user would be redirected after payment
-         * @param {OptionalParams} options Some optional stuff
-         * @returns {Promise&lt;any>} Whatver the axios would return
-         */
-        this.CreatePayment = (amount, callbackURL, options = { sandbox: false }) => {
+    /**
+    * Create a Payment
+    * @param {Number} amount Money Amount that you want in Tomans
+    * @param {String} callbackURL an URL that the user would be redirected after payment
+    * @param {OptionalParams} options Some optional stuff
+    * @returns {Promise&lt;any>} Whatver the axios would return
+    */
+    CreatePayment(amount, callbackURL, options = { sandbox: false })
+    {
             
-            if(!amount || typeof amount !== 'number' || amount &lt; 1000)
-                throw new Error(`Amount is invalid.`);
-            if(!callbackURL || typeof callbackURL !== 'string' || callbackURL == '' || callbackURL == ' ')
-                throw new Error(`CallbackURL is invalid.`);
+        if(!amount || typeof amount !== 'number' || amount &lt; 1000)
+            throw new Error(`Amount is invalid.`);
+        if(!callbackURL || typeof callbackURL !== 'string' || callbackURL == '' || callbackURL == ' ')
+            throw new Error(`CallbackURL is invalid.`);
 
-            let data = this.GetHeader();
-            data.Amount = amount;
-            data.CallbackURL = callbackURL;
-            data.Description = ('desc' in options &amp;&amp; typeof options['desc'] == 'string') ? options['desc'] : '';
-            data.Email = ('mail' in options &amp;&amp; typeof options['mail'] == 'string') ? options['mail'] : '';
-            data.Mobile = ('phone' in options &amp;&amp; typeof options['phone'] == 'string') ? options['phone'] : '';
+        let data = this.#GetHeader();
+        data.Amount = amount;
+        data.CallbackURL = callbackURL;
+        data.Description = ('desc' in options &amp;&amp; typeof options['desc'] == 'string') ? options['desc'] : '';
+        data.Email = ('mail' in options &amp;&amp; typeof options['mail'] == 'string') ? options['mail'] : '';
+        data.Mobile = ('phone' in options &amp;&amp; typeof options['phone'] == 'string') ? options['phone'] : '';
 
-            if('sandbox' in options &amp;&amp; options['sandbox'])
-                return this.#Request.sandbox.send(`/PaymentRequest.json`, 'POST', { data, })
-            else
-                return this.#Request.normal.send(`/PaymentRequest.json`, 'POST', { data, })
-        }
+        if('sandbox' in options &amp;&amp; options['sandbox'])
+            return this.#Request.sandbox.send(`/PaymentRequest.json`, 'POST', { data, })
+        else
+            return this.#Request.normal.send(`/PaymentRequest.json`, 'POST', { data, })
+    }
 
-        /**
-         * Verify a Created Payment
-         * @param {Number} amount Money Amount that you want in Tomans
-         * @param {String} authCode Authority Code that you recived after Creating a payment
-         * @param {Boolean} sandBox Send the Request as a SandBox Request
-         * @returns {Promise&lt;any>} Whatver the axios would return
-         */
-        this.VerifyPayment = (amount, authCode, sandBox = false) => {
-            if(!amount || typeof amount !== 'number' || amount &lt; 1000)
-                throw new Error(`Amount is invalid.`);
-            if(!authCode || typeof authCode !== 'string' || authCode == '' || authCode == ' ')
-                throw new Error(`authCode is invalid.`);
+    /**
+    * Verify a Created Payment
+    * @param {Number} amount Money Amount that you want in Tomans
+    * @param {String} authCode Authority Code that you recived after Creating a payment
+    * @param {Boolean} sandBox Send the Request as a SandBox Request
+    * @returns {Promise&lt;any>} Whatver the axios would return
+    */
+    VerifyPayment(amount, authCode, sandBox = false)
+    {
+        if(!amount || typeof amount !== 'number' || amount &lt; 1000)
+            throw new Error(`Amount is invalid.`);
+        if(!authCode || typeof authCode !== 'string' || authCode == '' || authCode == ' ')
+            throw new Error(`authCode is invalid.`);
 
-            let data = this.GetHeader();
-            data.Amount = amount;
-            data.Authority = authCode;
+        let data = this.#GetHeader();
+        data.Amount = amount;
+        data.Authority = authCode;
 
-            if(sandBox)
-                return this.#Request.sandbox.send(`/PaymentVerification.json`, 'POST', { data, })
-            else
-                return this.#Request.normal.send(`/PaymentVerification.json`, 'POST', { data, })
-        }
+        if(sandBox)
+            return this.#Request.sandbox.send(`/PaymentVerification.json`, 'POST', { data, })
+        else
+            return this.#Request.normal.send(`/PaymentVerification.json`, 'POST', { data, })
+    }
 
-        /**
-         * Refresh an Auth Code to Work again
-         * @param {String} authCode Authority Code that you recived after Creating a payment
-         * @param {Number} expireTime Amount of time that you want the authCode to work (in seconds)
-         * @param {Boolean} sandBox Send the Request as a SandBox Request
-         * @returns {Promise&lt;any>} Whatver the axios would return
-         */
-        this.RefreshAuth = (authCode, expireTime, sandBox = false) => {
+    /**
+    * Refresh an Auth Code to Work again
+    * @param {String} authCode Authority Code that you recived after Creating a payment
+    * @param {Number} expireTime Amount of time that you want the authCode to work (in seconds)
+    * @param {Boolean} sandBox Send the Request as a SandBox Request
+    * @returns {Promise&lt;any>} Whatver the axios would return
+    */
+    RefreshAuth(authCode, expireTime, sandBox = false)
+    {
 
-            if(!authCode || typeof authCode !== 'string' || authCode == '' || authCode == ' ')
-                throw new Error(`authCode is invalid.`);
-            if(!expireTime || typeof expireTime !== 'number' || expireTime &lt; 120)
-                throw new Error(`expireTime is invalid.`);
+        if(!authCode || typeof authCode !== 'string' || authCode == '' || authCode == ' ')
+            throw new Error(`authCode is invalid.`);
+        if(!expireTime || typeof expireTime !== 'number' || expireTime &lt; 120)
+            throw new Error(`expireTime is invalid.`);
 
-            if(sandBox)
-                return this.#Request.sandbox.send(`/RefreshAuthority.json`, 'POST', { data, })
-            else
-                return this.#Request.normal.send(`/RefreshAuthority.json`, 'POST', { data, })
-        }
+        if(sandBox)
+            return this.#Request.sandbox.send(`/RefreshAuthority.json`, 'POST', { data, })
+        else
+            return this.#Request.normal.send(`/RefreshAuthority.json`, 'POST', { data, })
+    }
 
-        /**
-         * Recive Failed(un-paied) Payments
-         * @returns {Promise&lt;any>} Whatver the axios would return
-         */
-        this.Transactions = (sandBox = false) => {
-            let data = this.GetHeader();
+    /**
+    * Recive Failed(un-paied) Payments
+    * @param {Boolean} sandBox Fetch SandBox Payments
+    * @returns {Promise&lt;any>} Whatver the axios would return
+    */
+    Transactions(sandBox = false)
+    {
+        let data = this.#GetHeader();
 
-            if(sandBox)
-                return this.#Request.sandbox.send(`/UnverifiedTransactions.json`, 'POST', { data, })
-            else
-                return this.#Request.normal.send(`/UnverifiedTransactions.json`, 'POST', { data, })
-        }
+        if(sandBox)
+            return this.#Request.sandbox.send(`/UnverifiedTransactions.json`, 'POST', { data, })
+        else
+            return this.#Request.normal.send(`/UnverifiedTransactions.json`, 'POST', { data, })
+    }
 
-        /**
-         * Get Error Message
-         * @param {String} errorCode Error code that you would recive in the callback from ZarinPal (a number)
-         * @returns {String} Message in Persian
-         */
-         this.GetError = (errorCode) => {
-            if(!errorCode || typeof errorCode !== 'string' || errorCode == '' || errorCode == ' ' || !errorCode in this.Errors[statusCode])
-                throw new Error(`Error Code is Invalid.`);
+    /**
+    * Get Error Message
+    * @param {String} errorCode Error code that you would recive in the callback from ZarinPal (a number)
+    * @returns {String} Message in Persian
+    */
+    GetError(errorCode)
+    {
+        if(!errorCode || typeof errorCode !== 'string' || errorCode == '' || errorCode == ' ' || !errorCode in this.Errors[statusCode])
+            throw new Error(`Error Code is Invalid.`);
 
-            return this.Errors[statusCode];
-        }
-
-        /**
-         * All Error Codes and Their Meaning
-         */
-        this.Errors = ErrorCodes;
-
+        return this.Errors[statusCode];
     }
 }</code></pre>
         </article>
@@ -285,7 +292,7 @@ export class ZarinpalEngine extends EngineBase {
       <script src="scripts/search.js"></script>
       <script src="scripts/third-party/fuse.js"></script>
       <script>
-        var list = [{"title":"EngineBase","link":"<a href=\"EngineBase_EngineBase.html\">EngineBase</a>"},{"title":"IDPayEngine","link":"<a href=\"IDPayEngine_IDPayEngine.html\">IDPayEngine</a>"},{"title":"RequestHandler","link":"<a href=\"RequestHandler.html\">RequestHandler</a>"},{"title":"RequestHandler#send","link":"<a href=\"RequestHandler.html#send\">RequestHandler &rtrif; send</a>"},{"title":"IDPayHeader","link":"<a href=\"global.html#IDPayHeader\">IDPayHeader</a>"},{"title":"OptionalParams","link":"<a href=\"global.html#OptionalParams\">OptionalParams</a>"},{"title":"PaymentParams","link":"<a href=\"global.html#PaymentParams\">PaymentParams</a>"},{"title":"ReqParams","link":"<a href=\"global.html#ReqParams\">ReqParams</a>"}];
+        var list = [{"title":"exports","link":"<a href=\"module.exports.html\">exports</a>"},{"title":"module.exports#CreatePayment","link":"<a href=\"module.exports.html#CreatePayment\">module.exports &rtrif; CreatePayment</a>"},{"title":"module.exports#CreatePayment","link":"<a href=\"module.exports.html#CreatePayment\">module.exports &rtrif; CreatePayment</a>"},{"title":"module.exports#GetError","link":"<a href=\"module.exports.html#GetError\">module.exports &rtrif; GetError</a>"},{"title":"module.exports#GetError","link":"<a href=\"module.exports.html#GetError\">module.exports &rtrif; GetError</a>"},{"title":"module.exports#GetMessage","link":"<a href=\"module.exports.html#GetMessage\">module.exports &rtrif; GetMessage</a>"},{"title":"module.exports#PaymentStatus","link":"<a href=\"module.exports.html#PaymentStatus\">module.exports &rtrif; PaymentStatus</a>"},{"title":"module.exports#RefreshAuth","link":"<a href=\"module.exports.html#RefreshAuth\">module.exports &rtrif; RefreshAuth</a>"},{"title":"module.exports#send","link":"<a href=\"module.exports.html#send\">module.exports &rtrif; send</a>"},{"title":"module.exports#Transactions","link":"<a href=\"module.exports.html#Transactions\">module.exports &rtrif; Transactions</a>"},{"title":"module.exports#Transactions","link":"<a href=\"module.exports.html#Transactions\">module.exports &rtrif; Transactions</a>"},{"title":"module.exports#VerifyPayment","link":"<a href=\"module.exports.html#VerifyPayment\">module.exports &rtrif; VerifyPayment</a>"},{"title":"module.exports#VerifyPayment","link":"<a href=\"module.exports.html#VerifyPayment\">module.exports &rtrif; VerifyPayment</a>"},{"title":"exports","link":"<a href=\"module.exports_module.exports.html\">exports</a>"},{"title":"IDPayHeader","link":"<a href=\"global.html#IDPayHeader\">IDPayHeader</a>"},{"title":"OptionalParams","link":"<a href=\"global.html#OptionalParams\">OptionalParams</a>"},{"title":"PaymentParams","link":"<a href=\"global.html#PaymentParams\">PaymentParams</a>"},{"title":"ReqParams","link":"<a href=\"global.html#ReqParams\">ReqParams</a>"}];
         var options = 
           setupSearch(list, options)
       </script>

@@ -31,7 +31,7 @@
 
 
     <title>
-      RequestHandler
+      exports
     </title>
 
     <!--[if lt IE 9]>
@@ -83,7 +83,7 @@
   <body>
 
     <nav class="navbar" id="navbar">
-      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">IRPayments Documents</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="3921841" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="EngineBase_EngineBase.html">EngineBase</a></li><li class="accordion-list" id=""><a href="IDPayEngine_IDPayEngine.html">IDPayEngine</a></li><li class="accordion collapsed child" id=6207009><div class="accordion-heading child"><a href="RequestHandler.html">RequestHandler</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="RequestHandler.html#send">send</a></li></ul></li></ul> </div><div class="accordion collapsed" id="158097" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#IDPayHeader">IDPayHeader</a></li><li class="accordion-list" id=""><a href="global.html#OptionalParams">OptionalParams</a></li><li class="accordion-list" id=""><a href="global.html#PaymentParams">PaymentParams</a></li><li class="accordion-list" id=""><a href="global.html#ReqParams">ReqParams</a></li></ul> </div><ul><li class="menu-li"><a href='https://npmjs.com/package/irpayments' class=' menu-link' id='' target='_blank'>NPM Package</a></li><li class="menu-li"><a href='https://github.com/EhsanFox/IRPayments' class=' menu-link' id='' target='_blank'>Github</a></li><li class="menu-li"><a href='https://ehsan.js.org/' class=' menu-link' id='' target='_blank'>Ehsan's Website</a></li></ul>
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">IRPayments Documents</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="1860967" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=400227><div class="accordion-heading child"><a href="module.exports.html">exports</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module.exports.html#CreatePayment">CreatePayment</a></li><li data-type='method'><a href="module.exports.html#CreatePayment">CreatePayment</a></li><li data-type='method'><a href="module.exports.html#GetError">GetError</a></li><li data-type='method'><a href="module.exports.html#GetError">GetError</a></li><li data-type='method'><a href="module.exports.html#GetMessage">GetMessage</a></li><li data-type='method'><a href="module.exports.html#PaymentStatus">PaymentStatus</a></li><li data-type='method'><a href="module.exports.html#RefreshAuth">RefreshAuth</a></li><li data-type='method'><a href="module.exports.html#send">send</a></li><li data-type='method'><a href="module.exports.html#Transactions">Transactions</a></li><li data-type='method'><a href="module.exports.html#Transactions">Transactions</a></li><li data-type='method'><a href="module.exports.html#VerifyPayment">VerifyPayment</a></li><li data-type='method'><a href="module.exports.html#VerifyPayment">VerifyPayment</a></li></ul></li><li class="accordion-list" id=""><a href="module.exports_module.exports.html">exports</a></li></ul> </div><div class="accordion collapsed" id="855256" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#IDPayHeader">IDPayHeader</a></li><li class="accordion-list" id=""><a href="global.html#OptionalParams">OptionalParams</a></li><li class="accordion-list" id=""><a href="global.html#PaymentParams">PaymentParams</a></li><li class="accordion-list" id=""><a href="global.html#ReqParams">ReqParams</a></li></ul> </div><ul><li class="menu-li"><a href='https://npmjs.com/package/irpayments' class=' menu-link' id='' target='_blank'>NPM Package</a></li><li class="menu-li"><a href='https://github.com/EhsanFox/IRPayments' class=' menu-link' id='' target='_blank'>Github</a></li><li class="menu-li"><a href='https://ehsan.js.org/' class=' menu-link' id='' target='_blank'>Ehsan's Website</a></li></ul>
       
 
     </nav>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        RequestHandler
+        exports
       </h1>
       
 
@@ -115,12 +115,10 @@
         
         <h2>
         
-        RequestHandler
+        exports
         
         </h2>
         
-        
-            <div class="class-description"><p>Request handler for sending api requests</p></div>
         
     
 </header>
@@ -132,12 +130,10 @@
         
 
     
-        <h2>Constructor</h2>
-    
 
-    <h4 class="name" id="RequestHandler">
-        <a href="#RequestHandler">#</a>
-        <span class="type-signature"></span>new RequestHandler<span class="signature">(ServerURL)</span><span class="type-signature"></span>
+    <h4 class="name" id="exports">
+        <a href="#exports">#</a>
+        <span class="type-signature"></span>new exports<span class="signature">(token)</span><span class="type-signature"></span>
     </h4>
 
     
@@ -178,7 +174,7 @@
 
         <tr>
             
-                <td class="name"><code>ServerURL</code></td>
+                <td class="name"><code>token</code></td>
             
 
             <td class="type">
@@ -194,7 +190,7 @@
 
             
 
-            <td class="description last"><p>Server URL that would be added with URI in requests</p></td>
+            <td class="description last"><p>IDPay API Token</p></td>
         </tr>
 
     
@@ -239,7 +235,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Structers_Request.js.html">Structers/Request.js</a>, <a href="Structers_Request.js.html#line14">line 14</a>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line59">line 59</a>
             </li></ul></dd>
         </div>
     
@@ -275,13 +271,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="RequestHandler.html">RequestHandler</a></dt>
-            <dd></dd>
-        </dl>
     
 
      
@@ -291,25 +280,52 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
 
     
 
-    <h4 class="name" id="send">
-        <a href="#send">#</a>
-        <span class="type-signature"></span>send<span class="signature">(uri, method, params)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<header>
+    
+        
+        <h2>
+        
+        exports
+        
+        </h2>
+        
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="exports">
+        <a href="#exports">#</a>
+        <span class="type-signature"></span>new exports<span class="signature">(token)</span><span class="type-signature"></span>
     </h4>
 
     
 
 
-
-    <div class="description">
-        <p>Send a Request</p>
-    </div>
 
 
 
@@ -345,7 +361,7 @@
 
         <tr>
             
-                <td class="name"><code>uri</code></td>
+                <td class="name"><code>token</code></td>
             
 
             <td class="type">
@@ -361,53 +377,7 @@
 
             
 
-            <td class="description last"><p>Endpoint to add with ServerURL</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>method</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Method to send such as GET/POST/....</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>params</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ReqParams">ReqParams</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>an Object to send to the Endpoint Such as <code>Headers</code> and <code>data</code></p></td>
+            <td class="description last"><p>API-Token of ZarinPal (Must be 36 Chars)</p></td>
         </tr>
 
     
@@ -452,7 +422,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Structers_Request.js.html">Structers/Request.js</a>, <a href="Structers_Request.js.html#line37">line 37</a>
+                <a href="Engines_ZarinPal_index.js.html">Engines/ZarinPal/index.js</a>, <a href="Engines_ZarinPal_index.js.html#line39">line 39</a>
             </li></ul></dd>
         </div>
     
@@ -478,31 +448,24 @@
 
 
 
-    <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
-        
-            
 
 
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;any></span>
 
-
-    </dd>
-</dl>
-
-            
+    
     </div>
 
+    
 
+    
 
+    
 
-        
+     
+
+    
+
+    
+
     
 
     
@@ -533,7 +496,7 @@
       <script src="scripts/search.js"></script>
       <script src="scripts/third-party/fuse.js"></script>
       <script>
-        var list = [{"title":"EngineBase","link":"<a href=\"EngineBase_EngineBase.html\">EngineBase</a>"},{"title":"IDPayEngine","link":"<a href=\"IDPayEngine_IDPayEngine.html\">IDPayEngine</a>"},{"title":"RequestHandler","link":"<a href=\"RequestHandler.html\">RequestHandler</a>"},{"title":"RequestHandler#send","link":"<a href=\"RequestHandler.html#send\">RequestHandler &rtrif; send</a>"},{"title":"IDPayHeader","link":"<a href=\"global.html#IDPayHeader\">IDPayHeader</a>"},{"title":"OptionalParams","link":"<a href=\"global.html#OptionalParams\">OptionalParams</a>"},{"title":"PaymentParams","link":"<a href=\"global.html#PaymentParams\">PaymentParams</a>"},{"title":"ReqParams","link":"<a href=\"global.html#ReqParams\">ReqParams</a>"}];
+        var list = [{"title":"exports","link":"<a href=\"module.exports.html\">exports</a>"},{"title":"module.exports#CreatePayment","link":"<a href=\"module.exports.html#CreatePayment\">module.exports &rtrif; CreatePayment</a>"},{"title":"module.exports#CreatePayment","link":"<a href=\"module.exports.html#CreatePayment\">module.exports &rtrif; CreatePayment</a>"},{"title":"module.exports#GetError","link":"<a href=\"module.exports.html#GetError\">module.exports &rtrif; GetError</a>"},{"title":"module.exports#GetError","link":"<a href=\"module.exports.html#GetError\">module.exports &rtrif; GetError</a>"},{"title":"module.exports#GetMessage","link":"<a href=\"module.exports.html#GetMessage\">module.exports &rtrif; GetMessage</a>"},{"title":"module.exports#PaymentStatus","link":"<a href=\"module.exports.html#PaymentStatus\">module.exports &rtrif; PaymentStatus</a>"},{"title":"module.exports#RefreshAuth","link":"<a href=\"module.exports.html#RefreshAuth\">module.exports &rtrif; RefreshAuth</a>"},{"title":"module.exports#send","link":"<a href=\"module.exports.html#send\">module.exports &rtrif; send</a>"},{"title":"module.exports#Transactions","link":"<a href=\"module.exports.html#Transactions\">module.exports &rtrif; Transactions</a>"},{"title":"module.exports#Transactions","link":"<a href=\"module.exports.html#Transactions\">module.exports &rtrif; Transactions</a>"},{"title":"module.exports#VerifyPayment","link":"<a href=\"module.exports.html#VerifyPayment\">module.exports &rtrif; VerifyPayment</a>"},{"title":"module.exports#VerifyPayment","link":"<a href=\"module.exports.html#VerifyPayment\">module.exports &rtrif; VerifyPayment</a>"},{"title":"exports","link":"<a href=\"module.exports_module.exports.html\">exports</a>"},{"title":"IDPayHeader","link":"<a href=\"global.html#IDPayHeader\">IDPayHeader</a>"},{"title":"OptionalParams","link":"<a href=\"global.html#OptionalParams\">OptionalParams</a>"},{"title":"PaymentParams","link":"<a href=\"global.html#PaymentParams\">PaymentParams</a>"},{"title":"ReqParams","link":"<a href=\"global.html#ReqParams\">ReqParams</a>"}];
         var options = 
           setupSearch(list, options)
       </script>
