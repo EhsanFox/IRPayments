@@ -97,7 +97,7 @@ class IDPayEngine {
         if(!id || id == '' || id == ' ' || typeof id !== 'string' || id.length > 50)
             throw new Error(`ID is Invalid.`);
 
-        if(!amount || typeof amount == 'number' || amount == 0 || amount > 500000000 || amount < 1000)
+        if(!amount || typeof amount !== 'number' || amount == 0 || amount > 500000000 || amount < 1000)
             throw new Error(`Amount number is Invalid.`);
 
         let paymentObject = {
@@ -127,7 +127,7 @@ class IDPayEngine {
 
         return this.#Request.send(`/payment`, 'POST', {
             data: paymentObject,
-            Headers: this.GetHeader(sandBox)
+            Headers: this.#GetHeader(sandBox)
         })
     }
 
@@ -151,7 +151,7 @@ class IDPayEngine {
                 id: recivedID,
                 order_id: createdID
             },
-            Headers: this.GetHeader(sandBox)
+            Headers: this.#GetHeader(sandBox)
         })
     }
 
@@ -175,7 +175,7 @@ class IDPayEngine {
                 id: recivedID,
                 order_id: createdID
             },
-            Headers: this.GetHeader(sandBox)
+            Headers: this.#GetHeader(sandBox)
         })    ;
     }
 
@@ -199,7 +199,7 @@ class IDPayEngine {
                 page: pageNumber,
                 page_size: pageSize,
             },
-            Headers: this.GetHeader(sandBox)
+            Headers: this.#GetHeader(sandBox)
         });
     }
 
