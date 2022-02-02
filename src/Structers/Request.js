@@ -37,6 +37,7 @@ class RequestHandler {
          */
         this.send = (uri, method = 'get', params = {}) =>
         {
+            method = method.toLowerCase();
             return axios[method]
                 (
                     uri,
