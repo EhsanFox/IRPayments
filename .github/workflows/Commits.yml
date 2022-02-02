@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+        
+      - name: 📩 | Install Packages
         run: npm install
 
       - name: 🛠 | Generating
@@ -42,15 +44,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 💥 | Checkout
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: 🚀 | Setup Node
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: 10
-      - run: npm install
+      
+      - name: 📩 | Install Packages
+        run: npm install
 
       - name: 🎉 | Publish Package
-      - uses: JS-DevTools/npm-publish@v1
+        uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
