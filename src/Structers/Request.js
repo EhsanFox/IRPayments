@@ -1,4 +1,4 @@
-import axios from "axios";
+const { default: axios } = require("axios");
 
 /**
  * @typedef ReqParams
@@ -11,7 +11,7 @@ import axios from "axios";
  * Request handler for sending api requests
  * @class
  */
-export class RequestHandler {
+module.exports = class RequestHandler {
     /**
      * Base URL that would add up with URI
      * @private

@@ -1,7 +1,7 @@
-import { IDPayEngine } from "./IDPay.js";
-import { ZarinpalEngine } from "./ZarinPal/index.js";
+const IDPayEngine = require("./IDPay");
+const ZarinpalEngine = require("./ZarinPal");
 
-export const Engines = { 
+module.exports = { 
     IDPay: IDPayEngine,
     ZarinPal: ZarinpalEngine
 }

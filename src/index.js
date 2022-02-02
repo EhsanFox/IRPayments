@@ -1,13 +1,10 @@
-import { Engines } from "./Engines/index.js";
-import { EngineBase } from "./Structers/EngineBase.js";
-import { RequestHandler } from "./Structers/Request.js";
-
+const Engines = require("./Engines");
+const RequestHandler = require("./Structers/Request");
 const Util = {
-    RequestHandler,
-    EngineStructer: EngineBase
+    RequestHandler
 }
 
-export {
+module.exports = {
     Engines,
     Util,
 }
