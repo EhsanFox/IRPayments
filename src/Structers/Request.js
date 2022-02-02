@@ -10,8 +10,9 @@ const { default: axios } = require("axios");
 /**
  * Request handler for sending api requests
  * @class
+ * @classdesc Request handler for sending api requests
  */
-module.exports = class RequestHandler {
+class RequestHandler {
     /**
      * Base URL that would add up with URI
      * @private
@@ -48,3 +49,5 @@ module.exports = class RequestHandler {
         }
     }
 }
+
+module.exports = RequestHandler;
