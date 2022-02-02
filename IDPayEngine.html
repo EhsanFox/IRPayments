@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding favicon -->
+    
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      IDPayEngine
+    </title>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-dark.css">
+    
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">IRPayments Documents</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="7506856" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=6491808><div class="accordion-heading child"><a href="IDPayEngine.html">IDPayEngine</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="IDPayEngine.html#CreatePayment">CreatePayment</a></li><li data-type='method'><a href="IDPayEngine.html#GetError">GetError</a></li><li data-type='method'><a href="IDPayEngine.html#GetMessage">GetMessage</a></li><li data-type='method'><a href="IDPayEngine.html#PaymentStatus">PaymentStatus</a></li><li data-type='method'><a href="IDPayEngine.html#Transactions">Transactions</a></li><li data-type='method'><a href="IDPayEngine.html#VerifyPayment">VerifyPayment</a></li></ul></li><li class="accordion collapsed child" id=235607><div class="accordion-heading child"><a href="module.exports.html">exports</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module.exports.html#send">send</a></li></ul></li><li class="accordion collapsed child" id=5638734><div class="accordion-heading child"><a href="ZarinpalEngine.html">ZarinpalEngine</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="ZarinpalEngine.html#CreatePayment">CreatePayment</a></li><li data-type='method'><a href="ZarinpalEngine.html#GetError">GetError</a></li><li data-type='method'><a href="ZarinpalEngine.html#RefreshAuth">RefreshAuth</a></li><li data-type='method'><a href="ZarinpalEngine.html#Transactions">Transactions</a></li><li data-type='method'><a href="ZarinpalEngine.html#VerifyPayment">VerifyPayment</a></li></ul></li></ul> </div><div class="accordion collapsed" id="9363578" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#IDPayHeader">IDPayHeader</a></li><li class="accordion-list" id=""><a href="global.html#OptionalParams">OptionalParams</a></li><li class="accordion-list" id=""><a href="global.html#PaymentParams">PaymentParams</a></li><li class="accordion-list" id=""><a href="global.html#ReqParams">ReqParams</a></li></ul> </div><ul><li class="menu-li"><a href='https://npmjs.com/package/irpayments' class=' menu-link' id='' target='_blank'>NPM Package</a></li><li class="menu-li"><a href='https://github.com/EhsanFox/IRPayments' class=' menu-link' id='' target='_blank'>Github</a></li><li class="menu-li"><a href='https://ehsan.js.org/' class=' menu-link' id='' target='_blank'>Ehsan's Website</a></li></ul>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        IDPayEngine
+      </h1>
+      
+
+      
+
+
+
+
+<section>
+
+
+<header>
+    
+        
+        <h2>
+        
+        IDPayEngine
+        
+        </h2>
+        
+        
+            <div class="class-description"><p>IDPay Engine Class
+Create a Connection between IDPay Gateway</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+        <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="IDPayEngine">
+        <a href="#IDPayEngine">#</a>
+        <span class="type-signature"></span>new IDPayEngine<span class="signature">(token)</span><span class="type-signature"></span>
+    </h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>IDPay API Token</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line28">line 28</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="Errors">
+    <a href="#Errors">#</a>
+    <span class="type-signature"></span>Errors<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>All Error Codes and Their Meaning</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line59">line 59</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="TransactionCodes">
+    <a href="#TransactionCodes">#</a>
+    <span class="type-signature"></span>TransactionCodes<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>All Transactions Codes and their Meaning</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line54">line 54</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="CreatePayment">
+        <a href="#CreatePayment">#</a>
+        <span class="type-signature"></span>CreatePayment<span class="signature">(id, amount, params)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Create a Payment</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ID of Order/Payment - 50 Length at the Must</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>amount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Money Amount that you want in IRR (Rial)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#PaymentParams">PaymentParams</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Some Params that are optional</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line94">line 94</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Whatver the axios would return</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;any></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="GetError">
+        <a href="#GetError">#</a>
+        <span class="type-signature"></span>GetError<span class="signature">(statusCode, errorCode)</span><span class="type-signature"> &rarr; {String}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Get Error Message</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>statusCode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>StatusCode that would be in the Response Header (such as 200, 404, ....)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>errorCode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Error code that you would recive in the callback from IDPay (a random number)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line226">line 226</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Message in Persian</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="GetMessage">
+        <a href="#GetMessage">#</a>
+        <span class="type-signature"></span>GetMessage<span class="signature">(code)</span><span class="type-signature"> &rarr; {String}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Get Transaction Message by Code</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Transaction Code</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line211">line 211</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Message in Persian</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="PaymentStatus">
+        <a href="#PaymentStatus">#</a>
+        <span class="type-signature"></span>PaymentStatus<span class="signature">(recivedID, createdID, sandBox)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Get Status of a Created Payment</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>recivedID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>ID That you recived after Creating a payment with <code>CreatePayment</code> Method</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>createdID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>ID That you sent for Creating a Payment with <code>CreatePayment</code> Method</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sandBox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Send The Request as a SandBox Request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line165">line 165</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Whatver the axios would return</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;any></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="Transactions">
+        <a href="#Transactions">#</a>
+        <span class="type-signature"></span>Transactions<span class="signature">(pageNumber, pageSize, sandBox)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Get a List of all Transactions</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pageNumber</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>Page Number to fetch the Transactions (default is 0)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pageSize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    25
+                
+                </td>
+            
+
+            <td class="description last"><p>Data size that would be fetched from the Page (Default is the last 25)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sandBox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Send The Request as a SandBox Request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line189">line 189</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Whatver the axios would return</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;any></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="VerifyPayment">
+        <a href="#VerifyPayment">#</a>
+        <span class="type-signature"></span>VerifyPayment<span class="signature">(recivedID, createdID, sandBox)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Verify a Created Payment (or the Callback)</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>recivedID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>ID That you recived after Creating a payment with <code>CreatePayment</code> Method</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>createdID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>ID That you sent for Creating a Payment with <code>CreatePayment</code> Method</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sandBox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Send The Request as a SandBox Request</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="Engines_IDPay_index.js.html">Engines/IDPay/index.js</a>, <a href="Engines_IDPay_index.js.html#line141">line 141</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>Whatver the axios would return</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;any></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    </div>
+
+    <footer class="footer" id="footer">
+      Made with 💖 By Ehsan
+    </footer>
+
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
+
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"IDPayEngine","link":"<a href=\"IDPayEngine.html\">IDPayEngine</a>"},{"title":"IDPayEngine#CreatePayment","link":"<a href=\"IDPayEngine.html#CreatePayment\">IDPayEngine &rtrif; CreatePayment</a>"},{"title":"IDPayEngine#GetError","link":"<a href=\"IDPayEngine.html#GetError\">IDPayEngine &rtrif; GetError</a>"},{"title":"IDPayEngine#GetMessage","link":"<a href=\"IDPayEngine.html#GetMessage\">IDPayEngine &rtrif; GetMessage</a>"},{"title":"IDPayEngine#PaymentStatus","link":"<a href=\"IDPayEngine.html#PaymentStatus\">IDPayEngine &rtrif; PaymentStatus</a>"},{"title":"IDPayEngine#Transactions","link":"<a href=\"IDPayEngine.html#Transactions\">IDPayEngine &rtrif; Transactions</a>"},{"title":"IDPayEngine#VerifyPayment","link":"<a href=\"IDPayEngine.html#VerifyPayment\">IDPayEngine &rtrif; VerifyPayment</a>"},{"title":"exports","link":"<a href=\"module.exports.html\">exports</a>"},{"title":"module.exports#send","link":"<a href=\"module.exports.html#send\">module.exports &rtrif; send</a>"},{"title":"ZarinpalEngine","link":"<a href=\"ZarinpalEngine.html\">ZarinpalEngine</a>"},{"title":"ZarinpalEngine#CreatePayment","link":"<a href=\"ZarinpalEngine.html#CreatePayment\">ZarinpalEngine &rtrif; CreatePayment</a>"},{"title":"ZarinpalEngine#GetError","link":"<a href=\"ZarinpalEngine.html#GetError\">ZarinpalEngine &rtrif; GetError</a>"},{"title":"ZarinpalEngine#RefreshAuth","link":"<a href=\"ZarinpalEngine.html#RefreshAuth\">ZarinpalEngine &rtrif; RefreshAuth</a>"},{"title":"ZarinpalEngine#Transactions","link":"<a href=\"ZarinpalEngine.html#Transactions\">ZarinpalEngine &rtrif; Transactions</a>"},{"title":"ZarinpalEngine#VerifyPayment","link":"<a href=\"ZarinpalEngine.html#VerifyPayment\">ZarinpalEngine &rtrif; VerifyPayment</a>"},{"title":"IDPayHeader","link":"<a href=\"global.html#IDPayHeader\">IDPayHeader</a>"},{"title":"OptionalParams","link":"<a href=\"global.html#OptionalParams\">OptionalParams</a>"},{"title":"PaymentParams","link":"<a href=\"global.html#PaymentParams\">PaymentParams</a>"},{"title":"ReqParams","link":"<a href=\"global.html#ReqParams\">ReqParams</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+  </body>
+
+</html>
