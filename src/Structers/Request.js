@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const { default: axios, Axios } = require("axios");
 
 /**
  * @typedef ReqParams
@@ -25,7 +25,7 @@ class RequestHandler {
      */
     constructor(ServerURL)
     {
-        this.BaseURL = ServerURL;
+        this.#BaseURL = ServerURL;
 
         /**
          * Send a Request
@@ -38,15 +38,24 @@ class RequestHandler {
         this.send = (uri, method = 'get', params = {}) =>
         {
             method = method.toLowerCase();
-            return axios[method]
-                (
-                    uri,
-                    {
-                        baseURL: this.BaseURL,
-                        data: ('data' in params && params['data']) ? params.data : null,
-                        Headers: ('Headers' in params && params['Headers']) ? params.Headers : null,
-                    }
-                );
+            let headerObject = {
+                'content-type': 'application/json'
+            }
+            if(method == 'get')
+                return axios['get'](uri, {
+                    baseURL: this.#BaseURL,
+                    data: ('data' in params && params['data']) ? params.data : null,
+                    Headers: ('Headers' in params && params['Headers']) ? {...params.Headers, ...headerObject} : headerObject,
+                    
+                })
+            else if(method == 'post')
+            {
+                return axios['post'](uri, ('data' in params && params['data']) ? params.data : null, {
+                    baseURL: this.#BaseURL,
+                    headers: ('Headers' in params && params['Headers']) ? {...params.Headers, ...headerObject} : headerObject,
+                })
+            }
+            
         }
     }
 }
