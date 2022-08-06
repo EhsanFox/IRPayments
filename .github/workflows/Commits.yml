@@ -1,4 +1,4 @@
-name: 📂 | Build Documents
+name: 📂 | Publishing
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - name: 🚀 | Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 16.16.0
       
       - name: 📩 | Install Packages
         run: npm install
