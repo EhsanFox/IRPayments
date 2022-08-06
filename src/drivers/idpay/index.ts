@@ -67,12 +67,12 @@ export class IDPay {
             const response = await this.Request.post<IDPayTypes.CreatePaymentSucces>(`/payment`, paymentObject, { headers: this.GetHeader(sandBox), baseURL: this.apiUrl });
             const data = response.data
             if('error_code' in data)
-                throw new Error(`IDPay Error: ${data.error_code} - ${data.error_message} - ${this.GetError(response.status.toString(), data.error_code.toString())}`);
+                throw new Error(`IDPay Error: ${data.error_code} - ${data.error_message}`);
 
             return data;
         } catch (error) {
             const e: AxiosError<IDPayTypes.IDPayError> = error as AxiosError<IDPayTypes.IDPayError>
-            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message} - ${this.GetError(e.response.status.toString(), e.response.data.error_code.toString())}`);
+            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message}`);
         }
     }
 
@@ -96,12 +96,12 @@ export class IDPay {
             const data = response.data
 
             if('error_code' in data)
-                throw new Error(`IDPay Error: ${data.error_code} - ${data.error_message} - ${this.GetError(response.status.toString(), data.error_code.toString())}`);
+                throw new Error(`IDPay Error: ${data.error_code} - ${data.error_message}`);
         
             return data;
         } catch (error) {
             const e: AxiosError<IDPayTypes.IDPayError> = error as AxiosError<IDPayTypes.IDPayError>
-            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message} - ${this.GetError(e.response.status.toString(), e.response.data.error_code.toString())}`);
+            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message}`);
         }
     }
 
@@ -145,10 +145,6 @@ export class IDPay {
     */
     GetMessage(code: string)
     {
-
-        if(!code || typeof code !== 'string' || code == '' || code == ' ' || !this.TransactionCodes[code as keyof typeof this.TransactionCodes])
-            throw new Error(`Transaction Code is invalid.`);
-        
         return this.TransactionCodes[code as keyof typeof this.TransactionCodes];
     }
 
@@ -160,11 +156,6 @@ export class IDPay {
     */
     GetError(statusCode: string, errorCode: string)
     {
-        if(!statusCode || typeof statusCode !== 'string' || statusCode == '' || statusCode == ' ' || !this.Errors[statusCode as keyof typeof this.Errors])
-            throw new Error(`Status Code is Invalid.`);
-        if(!errorCode || typeof errorCode !== 'string' || errorCode == '' || errorCode == ' ' || !this.Errors[errorCode as keyof typeof this.Errors])
-            throw new Error(`Error Code is Invalid.`);
-
         // eslint-disable-next-line
         // @ts-ignore
         return this.Errors[statusCode as keyof typeof this.Errors][errorCode as keyof typeof this.Errors];
