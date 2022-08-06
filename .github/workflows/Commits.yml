@@ -6,40 +6,6 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-
-    steps:
-      - name: 💥 | Checkout
-        uses: actions/checkout@v2
-
-      - name: 🚀 | Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-        
-      - name: 📩 | Install Packages
-        run: npm install
-
-      - name: 🛠 | Generating
-        uses: andstor/jsdoc-action@v1
-        with:
-          config_file: jsdoc.json
-
-      - name: 👀 | Package Version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@v1.1.0
-
-      - name: 🔴 | Publish Docs
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages 
-          folder: docs/irpayments/${{ steps.package-version.outputs.current-version }}/
-
   publish:
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +19,15 @@ jobs:
       
       - name: 📩 | Install Packages
         run: npm install
+
+      - name: ✅ | Check Lint
+        run: npm run lint:fix
+
+      - name: 💽 | Check TS-Compiler
+        run: npm run build:check
+
+      - name: 🧬 | Generate
+        run: npm run build
 
       - name: 🎉 | Publish Package
         uses: JS-DevTools/npm-publish@v1

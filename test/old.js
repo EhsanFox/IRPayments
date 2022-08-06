@@ -1,5 +1,5 @@
 const RequestHandler = require("../../Structers/Request");
-const ErrorCodes = require("./Errors.json");
+const ErrorCodes = require("../src/drivers/zarinpal/Errors.json");
 
 /**
  * @typedef OptionalParams
