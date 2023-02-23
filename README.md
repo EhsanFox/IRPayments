@@ -10,7 +10,7 @@ Connect your persian Payment Gateways to Your Website/Application with a Class
 - Supporting Mutli Engines (Web Services) such as IDPay and ZarinPal
 
 ## 📂 | Documents
-Documents of this Package is live at [/irpayments](https://ehsan.js.org/irpayments/)
+Documents of this Package is live at [/irpayments](https://ehsan.js.org/IRPayments/)
 
 ## ✍ | Examples
 ```javascript
