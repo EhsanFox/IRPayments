@@ -1,6 +1,6 @@
 {
   "name": "irpayments",
-  "version": "1.10.3",
+  "version": "1.10.4",
   "description": "IR Payments, a package for all payment gateways of IRAN",
   "main": "dist/src/index.js",
   "typings": "dist/index.d.ts",

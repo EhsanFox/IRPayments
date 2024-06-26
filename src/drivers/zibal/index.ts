@@ -8,7 +8,10 @@ import {
 
 export class Zibal {
   private readonly baseUrl = "https://gateway.zibal.ir/v1";
-  private Request: AxiosInstance = axios.create({ baseURL: this.baseUrl });
+  private Request: AxiosInstance = axios.create({
+    baseURL: this.baseUrl,
+    headers: { "Content-Type": "application/json" },
+  });
 
   constructor(
     private readonly merchant: string,
@@ -46,7 +49,8 @@ export class Zibal {
         amount,
         callbackUrl: this.callbackUrl,
         ...opts,
-      }
+      },
+      { headers: { "Content-Type": "application/json" }, baseURL: this.baseUrl }
     );
 
     let statusMessage: string | null = null;
@@ -103,10 +107,14 @@ export class Zibal {
     orderId?: string;
     message: string;
   }> {
-    const res = await this.Request.post<iVerifyResult>("/verify", {
-      merchant: isSandbox ? "zibal" : this.merchant,
-      trackId,
-    });
+    const res = await this.Request.post<iVerifyResult>(
+      "/verify",
+      {
+        merchant: isSandbox ? "zibal" : this.merchant,
+        trackId,
+      },
+      { headers: { "Content-Type": "application/json" }, baseURL: this.baseUrl }
+    );
 
     let statusMessage: string | null = null;
     if (res.data.result) {
@@ -163,10 +171,14 @@ export class Zibal {
   }
 
   public async inquiry(trackId: string, isSandbox = false) {
-    const res = await this.Request.post<iInquiryResult>("/inquiry", {
-      merchant: isSandbox ? "zibal" : this.merchant,
-      trackId,
-    });
+    const res = await this.Request.post<iInquiryResult>(
+      "/inquiry",
+      {
+        merchant: isSandbox ? "zibal" : this.merchant,
+        trackId,
+      },
+      { headers: { "Content-Type": "application/json" }, baseURL: this.baseUrl }
+    );
 
     let statusMessage: string | null = null;
     if (res.data.result) {
