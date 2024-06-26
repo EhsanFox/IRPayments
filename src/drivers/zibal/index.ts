@@ -81,7 +81,7 @@ export class Zibal {
   }
 
   public startURL(trackId: string) {
-    return `${this.baseUrl}/start/${trackId}`;
+    return `https://gateway.zibal.ir/start/${trackId}`;
   }
 
   public async verify(
