@@ -78,9 +78,6 @@ export class Zibal {
       }
     }
 
-    // eslint-disable-next-line no-console
-    console.log(res.data);
-
     return {
       ...res.data,
       statusMessage,
@@ -143,30 +140,29 @@ export class Zibal {
       }
     }
 
-    // eslint-disable-next-line no-console
-    console.log(res.data);
-
     return {
       ...res.data,
       statusMessage,
       statusCodeMessage:
-        StatusCodes[
-          res.data.status.toString() as
-            | "-1"
-            | "-2"
-            | "1"
-            | "2"
-            | "3"
-            | "4"
-            | "5"
-            | "6"
-            | "7"
-            | "8"
-            | "9"
-            | "10"
-            | "11"
-            | "12"
-        ],
+        res.data.result == 100
+          ? StatusCodes[
+              res.data.status.toString() as
+                | "-1"
+                | "-2"
+                | "1"
+                | "2"
+                | "3"
+                | "4"
+                | "5"
+                | "6"
+                | "7"
+                | "8"
+                | "9"
+                | "10"
+                | "11"
+                | "12"
+            ]
+          : null,
     };
   }
 
@@ -200,8 +196,6 @@ export class Zibal {
           break;
       }
 
-      // eslint-disable-next-line no-console
-      console.log(res.data);
       return {
         ...res.data,
         statusMessage,
