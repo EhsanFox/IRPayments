@@ -7,7 +7,7 @@ import {
 } from "../../types/drivers/zibal";
 
 export class Zibal {
-  private readonly baseUrl = "https://gateway.zibal.ir/v1";
+  private readonly baseUrl = "https://gateway.zibal.ir";
   private Request: AxiosInstance = axios.create({
     baseURL: this.baseUrl,
     headers: { "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ export class Zibal {
     payLink?: string;
   }> {
     const res = await this.Request.post<iRequestResult>(
-      this.isLazyMode ? "/request/lazy" : "/request",
+      this.isLazyMode ? "/request/lazy" : "/v1/request",
       {
         merchant: isSandbox ? "zibal" : this.merchant,
         amount,
@@ -108,7 +108,7 @@ export class Zibal {
     message: string;
   }> {
     const res = await this.Request.post<iVerifyResult>(
-      "/verify",
+      this.isLazyMode ? "/verify" : "/v1/verify",
       {
         merchant: isSandbox ? "zibal" : this.merchant,
         trackId,
@@ -172,7 +172,7 @@ export class Zibal {
 
   public async inquiry(trackId: string, isSandbox = false) {
     const res = await this.Request.post<iInquiryResult>(
-      "/inquiry",
+      "/v1/inquiry",
       {
         merchant: isSandbox ? "zibal" : this.merchant,
         trackId,
