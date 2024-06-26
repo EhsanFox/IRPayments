@@ -74,6 +74,9 @@ export class Zibal {
       }
     }
 
+    // eslint-disable-next-line no-console
+    console.log(res.data);
+
     return {
       ...res.data,
       statusMessage,
@@ -132,6 +135,9 @@ export class Zibal {
       }
     }
 
+    // eslint-disable-next-line no-console
+    console.log(res.data);
+
     return {
       ...res.data,
       statusMessage,
@@ -182,6 +188,8 @@ export class Zibal {
           break;
       }
 
+      // eslint-disable-next-line no-console
+      console.log(res.data);
       return {
         ...res.data,
         statusMessage,
