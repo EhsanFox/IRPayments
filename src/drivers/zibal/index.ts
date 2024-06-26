@@ -6,7 +6,7 @@ import {
   iVerifyResult,
 } from "../../types/drivers/zibal";
 
-export default class Zibal {
+export class Zibal {
   private readonly baseUrl = "https://gateway.zibal.ir/v1";
   private Request: AxiosInstance = axios.create({ baseURL: this.baseUrl });
 
