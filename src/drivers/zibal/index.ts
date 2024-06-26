@@ -33,6 +33,7 @@ export class Zibal {
       ledgerId?: string;
       linkToPay?: boolean;
       sms?: boolean;
+      feeMode?: 0 | 1 | 2;
     } = {},
     isSandbox = false
   ): Promise<{
