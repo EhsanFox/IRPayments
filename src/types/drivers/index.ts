@@ -1,2 +1,3 @@
-export * as IDPay from "./idpay";
-export * as Zibal from "./zibal";
+export * from "./idpay";
+export * from "./zarinpal";
+export * from "./zibal";

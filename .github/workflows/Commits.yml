@@ -15,8 +15,8 @@ jobs:
       - name: 🚀 | Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 16.16.0
-      
+          node-version: 22.12.0
+
       - name: 📩 | Install Packages
         run: npm install
 

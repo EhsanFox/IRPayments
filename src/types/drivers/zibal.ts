@@ -1,60 +1,186 @@
-export interface iRequestResult {
-  trackId: string;
-  result: 100 | 102 | 103 | 104 | 105 | 106 | 113 | string;
-  message: string;
-  payLink?: string;
-}
+export type ZBStatusCodes =
+  | "-1"
+  | -1
+  | "-2"
+  | -2
+  | 1
+  | "1"
+  | 2
+  | "2"
+  | 3
+  | "3"
+  | 4
+  | "4"
+  | 5
+  | "5"
+  | 6
+  | "6"
+  | 7
+  | "7"
+  | 8
+  | "8"
+  | 9
+  | "9"
+  | 10
+  | "10"
+  | 11
+  | "11"
+  | 12
+  | "12"
+  | 15
+  | "15"
+  | 16
+  | "16"
+  | 18
+  | "18"
+  | 21
+  | "21";
+export type ZBCreatePaymentStatusCodes =
+  | 100
+  | "100"
+  | 102
+  | "102"
+  | 103
+  | "103"
+  | 104
+  | "104"
+  | 105
+  | "105"
+  | 106
+  | "106"
+  | 107
+  | "107"
+  | 108
+  | "108"
+  | 109
+  | "109"
+  | 110
+  | "110"
+  | 111
+  | "111"
+  | 112
+  | "112"
+  | 113
+  | "113"
+  | 114
+  | "114"
+  | 115
+  | "115";
 
-export interface iVerifyResult {
-  paidAt: Date | string;
-  amount: number;
-  result: 100 | 102 | 103 | 104 | 201 | 202 | 203;
-  status: number;
-  refNumber?: number;
-  description?: string;
+export type ZBVerifyResultCodes =
+  | 100
+  | "100"
+  | 102
+  | "102"
+  | 103
+  | "103"
+  | 104
+  | "104"
+  | 201
+  | "201"
+  | 202
+  | "202"
+  | 203
+  | "203";
+export interface ZBVerifyRawResult extends Record<string, unknown> {
+  /** تاریخ پرداخت سفارش - به فرمت ISODate (در صورت موفقیت‌آمیز بودن پرداخت) */
+  paidAt: string;
+  /** شماره کارت پرداخت کننده (Mask شده) */
   cardNumber: string;
-  orderId?: string;
-  message: string;
-}
-
-export interface iCallbackBody {
-  success: "1" | "0";
-  trackId: string;
-  orderId: string;
-  status: null;
-  cardNumber: string;
-  hashedCardNumber: string;
-}
-
-export interface iInquiryResult {
-  message: string;
-  result: 100 | 102 | 103 | 104 | 203;
-  refNumber?: number;
-  paidAt?: string | Date;
-  verifiedAt?: string | Date;
-  status: number;
+  /** وضعیت پرداخت (به بخش جداول، جدول وضعیت‌ها مراجعه کنید) */
+  status: ZBStatusCodes;
+  /** مبلغ سفارش (به ریال) */
   amount: number;
-  orderId: string;
+  /** شناسه مرجع تراکنش (در صورت موفقیت‌آمیز بودن پرداخت) */
+  refNumber: number;
+  /** توضیحات تراکنش (در صورت موفقیت‌آمیز بودن پرداخت) */
   description: string;
-  cardNumber: string;
-  multiplexingInfos: [];
-  wage: 0 | 1 | 2;
-  createdAt?: string | Date;
+  /** شناسه سفارش (در صورت موفقیت‌آمیز بودن پرداخت) */
+  orderId: string;
+  /** نتیجه درخواست (به بخش جداول، جدول کدهای نتیجه تایید پرداخت مراجعه کنید) */
+  result: ZBVerifyResultCodes;
+  /** پیغام حاوی نتیجه درخواست */
+  message: string;
+  /** اطلاعات تسهیم تراکنش (در صورت تسهیم‌دار بودن) */
+  multiplexingInfos?: MultiplexingInfo[];
 }
 
-export const StatusCodes = {
-  "-1": "در انتظار پردخت",
-  "-2": "خطای داخلی",
-  "1": "پرداخت شده - تاییدشده",
-  "2": "پرداخت شده - تاییدنشده",
-  "3": "لغوشده توسط کاربر",
-  "4": "‌شماره کارت نامعتبر می‌باشد.",
-  "5": "‌موجودی حساب کافی نمی‌باشد.",
-  "6": "رمز واردشده اشتباه می‌باشد.",
-  "7": "تعداد درخواست‌ها بیش از حد مجاز می‌باشد.",
-  "8": "تعداد پرداخت اینترنتی روزانه بیش از حد مجاز می‌باشد.",
-  "9": "مبلغ پرداخت اینترنتی روزانه بیش از حد مجاز می‌باشد.",
-  "10": "صادرکننده‌ی کارت نامعتبر می‌باشد.",
-  "11": "‌خطای سوییچ",
-  "12": "کارت قابل دسترسی نمی‌باشد.",
-};
+export interface MultiplexingInfo {
+  /** شماره شبا دریافت کننده */
+  iban?: string;
+  /** مبلغ تسهیم شده به ریال */
+  amount?: number;
+  /** توضیحات تسهیم */
+  description?: string;
+  /** وضعیت تسهیم */
+  status?: string;
+  /** کد خطای تسهیم */
+  errorCode?: number;
+  [key: string]: unknown;
+}
+
+export interface ZBInquiryRawResult extends Record<string, unknown> {
+  /** تاریخ ایجاد سفارش - به فرمت ISODate (در صورت موفقیت‌آمیز بودن پرداخت) */
+  createdAt: string;
+  /** تاریخ پرداخت سفارش - به فرمت ISODate (در صورت موفقیت‌آمیز بودن پرداخت) */
+  paidAt: string;
+  /** تاریخ تایید سفارش - به فرمت ISODate (در صورت موفقیت‌آمیز بودن پرداخت) */
+  verifiedAt: string;
+  /** شماره کارت پرداخت کننده (Mask شده) */
+  cardNumber: string;
+  /** وضعیت پرداخت (به بخش جداول، جدول وضعیت‌ها مراجعه کنید) */
+  status: ZBStatusCodes;
+  /** مبلغ سفارش (به ریال) */
+  amount: number;
+  /** شناسه مرجع تراکنش (در صورت موفقیت‌آمیز بودن پرداخت) */
+  refNumber: number;
+  /** توضیحات تراکنش */
+  description: string;
+  /** شناسه سفارش */
+  orderId: string;
+  /** نحوه کسر کارمزد: 0 = کسر از تراکنش، 1 = کسر از کیف پول کارمزد */
+  wage: number;
+  /** نتیجه درخواست (به بخش جداول، جدول کدهای نتیجه استعلام پرداخت مراجعه کنید) */
+  result: ZBVerifyResultCodes;
+  /** پیغام حاوی نتیجه درخواست */
+  message: string;
+  /** اطلاعات تسهیم تراکنش (در صورت تسهیم‌دار بودن) */
+  multiplexingInfos?: MultiplexingInfo[];
+}
+
+export interface _ZBCreatePaymentObject {
+  amount: number;
+  callbackUrl: string;
+  merchant: string;
+
+  allowedCards?: string[];
+  checkMobileWithCard?: boolean;
+  description?: string;
+  feeMode?: number;
+  mobile?: string;
+  multiplexingInfos?: MultiplexingInfo[];
+  nationalCode?: string;
+  orderId?: string;
+  percentMode?: number;
+}
+
+export interface _ZBCreatePaymentRawResult {
+  trackId: number;
+  result: ZBCreatePaymentStatusCodes;
+  message: string;
+}
+
+export interface _ZBVerifyPaymentObject {
+  merchant: string;
+  trackId: number;
+}
+
+export interface _ZBInquiryObject {
+  merchant: string;
+  trackId: number;
+}
+
+export interface ZBRawError<StatusCodes> {
+  message: string;
+  result: StatusCodes;
+}

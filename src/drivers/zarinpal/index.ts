@@ -1,92 +1,255 @@
-import axios from "axios";
-export * from "./Errors";
+import BigNumber from "bignumber.js";
+import { BaseClient } from "../../structures/client";
+import { randomUUID } from "node:crypto";
+import {
+  BasePaymentStatus,
+  ICreatePaymentOptional,
+  ICreatePaymentRequired,
+  ICreatePaymentResult,
+  ZPVerifyRawResult,
+  IinquiryPaymentRequired,
+  IVerifyPaymentRequired,
+  IVerifyPaymentResult,
+  ZPInquiryRawResult,
+  _ZPRawCreatePaymentObject,
+  _ZPCreatePaymentRawResult,
+  _ZPVerifyPaymentObject,
+  _ZPInquiryObject,
+  IDriverClient,
+} from "../../types";
+import { IPGBaseError } from "../../structures/errors";
+import axios, { AxiosError } from "axios";
 
-export default class ZarinPal {
-  private _requestLink = "https://api.zarinpal.com/pg/v4/payment/request.json";
-  private _verifyLink = "https://api.zarinpal.com/pg/v4/payment/verify.json";
-
-  private _unVerifiedLink =
-    "https://api.zarinpal.com/pg/v4/payment/unVerified.json";
-  private _gateway = "https://www.zarinpal.com/pg/StartPay";
-  private _currency = "IRR";
-
+export class ZarinpalDriver extends BaseClient<
+  ICreatePaymentRequired & ICreatePaymentOptional,
+  ZPVerifyRawResult,
+  ZPInquiryRawResult
+> {
   constructor(
-    private _merchant: string,
-    private _isToman: boolean = false,
-    private _isSandbox: boolean = false
+    token: string,
+    headerOpts: Record<string, string> = {},
+    baseURL = "https://payment.zarinpal.com/pg/v4/payment",
+    isSandbox = false,
   ) {
-    if (!_merchant || _merchant.length > 36 || _merchant.length < 36) {
-      throw new Error("Zarinpal Pay --> Merchant ID is invalid!");
+    super(baseURL, token, headerOpts, isSandbox);
+    this.sandbox(isSandbox);
+  }
+
+  sandbox(
+    on: boolean,
+  ): ThisType<
+    IDriverClient<
+      ICreatePaymentRequired & ICreatePaymentOptional,
+      ZPVerifyRawResult,
+      Record<string, unknown>
+    >
+  > {
+    if (on) this.rebuildHTTP("https://sandbox.zarinpal.com/");
+    else this.rebuildHTTP();
+
+    return this;
+  }
+
+  public getToken(): string {
+    if (this.isSandbox) return randomUUID();
+    else return this.token;
+  }
+
+  async createPayment(
+    opts: ICreatePaymentRequired & ICreatePaymentOptional,
+  ): Promise<ICreatePaymentResult> {
+    const { orderId, amount, callback_url, phone, mail, description } = opts;
+    const zpObj: _ZPRawCreatePaymentObject = {
+      order_id: orderId,
+      amount: BigNumber(amount).toNumber(),
+      callback_url: callback_url,
+      description: description ?? this.getDescription(),
+      merchant_id: this.getToken(),
+    };
+    if (phone) {
+      if (!zpObj.metadata) zpObj.metadata = {};
+      zpObj.mobile = phone;
+      zpObj.metadata.mobile = phone;
     }
-    if (this._isSandbox) {
-      this._requestLink =
-        "https://sandbox.zarinpal.com/pg/v4/payment/request.json";
-      this._verifyLink =
-        "https://sandbox.zarinpal.com/pg/v4/payment/verify.json";
-      this._gateway = "https://sandbox.zarinpal.com/pg/StartPay";
+    if (mail) {
+      if (!zpObj.metadata) zpObj.metadata = {};
+      zpObj.email = mail;
+      zpObj.metadata.email = mail;
     }
-    if (_isToman) {
-      this._currency = "IRT";
+
+    try {
+      const result = await this.http.post<_ZPCreatePaymentRawResult>(
+        "/request.json",
+        zpObj,
+      );
+      if (result.status === 200 || result.status === 201)
+        return this.toCreatePaymentResult(result.data);
+      else
+        throw new IPGBaseError(
+          result.data.errors.toString(),
+          result.data.data.code,
+        );
+    } catch (error) {
+      if (!axios.isAxiosError(error)) throw error;
+
+      const err: AxiosError<_ZPCreatePaymentRawResult> = error;
+      if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
+
+      throw new IPGBaseError(
+        err.response.data.errors.toString(),
+        err.response.data.data.code,
+      );
     }
   }
 
-  async create({
-    amount,
-    description,
-    callback_url,
-    mobile,
-    email,
-  }: CreateType) {
-    const { data } = await axios.post(this._requestLink, {
-      merchant_id: this._merchant,
-      amount,
-      currency: this._currency,
-      description,
-      callback_url,
-      metadata: [mobile, email],
-    });
-    if (data.errors?.length) {
-      throw new Error(`${JSON.stringify(data.errors)}`);
+  async verifyPayment(
+    opts: IVerifyPaymentRequired,
+  ): Promise<IVerifyPaymentResult<ZPVerifyRawResult>> {
+    const { authorityId, amount } = opts;
+
+    const zpObj: _ZPVerifyPaymentObject = {
+      amount: BigNumber(amount).toNumber(),
+      authority: authorityId,
+      merchant_id: this.getToken(),
+    };
+    try {
+      const result = await this.http.post<ZPVerifyRawResult>(
+        "/verify.json",
+        zpObj,
+      );
+
+      if (result.status === 200 || result.status === 201)
+        return this.toVerifyPaymentResult(result.data);
+      else
+        throw new IPGBaseError(
+          result.data.errors.toString(),
+          result.data.data.code,
+        );
+    } catch (error) {
+      if (!axios.isAxiosError(error)) throw error;
+
+      const err: AxiosError<_ZPCreatePaymentRawResult> = error;
+      if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
+
+      throw new IPGBaseError(
+        err.response.data.errors.toString(),
+        err.response.data.data.code,
+      );
     }
+  }
+
+  async inquiryPayment(
+    opts: IinquiryPaymentRequired,
+  ): Promise<BasePaymentStatus<ZPInquiryRawResult>> {
+    const { authorityId } = opts;
+
+    const zpObj: _ZPInquiryObject = {
+      authority: authorityId,
+      merchant_id: this.getToken(),
+    };
+
+    try {
+      const result = await this.http.post<ZPInquiryRawResult>(
+        "/inquiry.json",
+        zpObj,
+      );
+
+      if (result.status === 200 || result.status === 201)
+        return this.toInquiryResult(result.data);
+      else
+        throw new IPGBaseError(
+          result.data.errors.toString(),
+          result.data.data.code,
+        );
+    } catch (error) {
+      if (!axios.isAxiosError(error)) throw error;
+
+      const err: AxiosError<_ZPCreatePaymentRawResult> = error;
+      if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
+
+      throw new IPGBaseError(
+        err.response.data.errors.toString(),
+        err.response.data.data.code,
+      );
+    }
+  }
+
+  toCreatePaymentResult(raw: _ZPCreatePaymentRawResult): ICreatePaymentResult {
     return {
-      data: {
-        ...data.data,
-        link: `${this._gateway}/${data.data.authority}`,
-      },
-      errors: data.errors,
+      authorityId: raw.data.authority,
+      redirectUrl: `https://payment.zarinpal.com/pg/StartPay/${raw.data.authority}`,
     };
   }
-  async verify({ authority, amount }: VerifyType) {
-    const { data } = await axios.post(this._verifyLink, {
-      merchant_id: this._merchant,
-      amount,
-      authority,
-    });
-    if (data.errors?.length) {
-      throw new Error(`${JSON.stringify(data.errors)}`);
-    }
-    return data;
-  }
-  async unverified() {
-    const { data } = await axios.post(this._unVerifiedLink, {
-      merchant_id: this._merchant,
-    });
-    if (data.errors?.length) {
-      throw new Error(`Z${JSON.stringify(data.errors)}`);
-    }
-    return data;
-  }
-}
 
-interface CreateType {
-  amount: number;
-  callback_url: string;
-  description?: string;
-  mobile?: string;
-  email?: string;
-  order_id?: string;
-}
-interface VerifyType {
-  amount: number;
-  authority: string;
+  toVerifyPaymentResult(
+    raw: ZPVerifyRawResult,
+  ): IVerifyPaymentResult<ZPVerifyRawResult> {
+    return {
+      status:
+        raw.data.code === "101" || raw.data.code === 101
+          ? "verified"
+          : raw.data.code === "100" || raw.data.code === 100
+          ? "paid"
+          : raw.data.code === "-51" || raw.data.code === -51
+          ? "failed"
+          : raw.data.code === "-61" || raw.data.code === -61
+          ? "reversed"
+          : raw.data.code === "-50" || raw.data.code === -50
+          ? "failed" // Amount mismatch - payment failed
+          : raw.data.code === "-54" || raw.data.code === -54
+          ? "failed" // Invalid authority
+          : raw.data.code === "-55" || raw.data.code === -55
+          ? "failed" // Transaction not found
+          : raw.data.code === "-22" || raw.data.code === -22
+          ? "failed" // Transaction failed
+          : raw.data.code === "-21" || raw.data.code === -21
+          ? "failed" // No financial operation found
+          : "failed",
+      statusCode: raw.data.code as string,
+      card:
+        raw.data.code === "101" ||
+        raw.data.code === 101 ||
+        raw.data.code === "100" ||
+        raw.data.code === 100
+          ? raw.data.card_pan
+          : undefined,
+      cardHash:
+        raw.data.code === "101" ||
+        raw.data.code === 101 ||
+        raw.data.code === "100" ||
+        raw.data.code === 100
+          ? raw.data.card_hash
+          : undefined,
+      raw,
+    };
+  }
+
+  toInquiryResult(
+    raw: ZPInquiryRawResult,
+  ): BasePaymentStatus<ZPInquiryRawResult> {
+    return {
+      status:
+        raw.data.code === "101" || raw.data.code === 101
+          ? "verified"
+          : raw.data.code === "100" || raw.data.code === 100
+          ? "paid"
+          : raw.data.code === "-51" || raw.data.code === -51
+          ? "failed"
+          : raw.data.code === "-61" || raw.data.code === -61
+          ? "reversed"
+          : raw.data.code === "-50" || raw.data.code === -50
+          ? "failed" // Amount mismatch - payment failed
+          : raw.data.code === "-54" || raw.data.code === -54
+          ? "failed" // Invalid authority
+          : raw.data.code === "-55" || raw.data.code === -55
+          ? "failed" // Transaction not found
+          : raw.data.code === "-22" || raw.data.code === -22
+          ? "failed" // Transaction failed
+          : raw.data.code === "-21" || raw.data.code === -21
+          ? "failed" // No financial operation found
+          : "failed",
+      statusCode: raw.data.code as string,
+      raw,
+    };
+  }
 }

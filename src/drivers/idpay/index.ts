@@ -1,163 +1,216 @@
+import BigNumber from "bignumber.js";
+import { BaseClient } from "../../structures/client";
+import {
+  _IDPayRawCreatePaymentObject,
+  _IDPayRawCreatePaymentResult,
+  _IDPayRawInquiryObject,
+  _IDPayRawVerifyPaymentObject,
+  BasePaymentStatus,
+  ICreatePaymentOptional,
+  ICreatePaymentRequired,
+  ICreatePaymentResult,
+  IDPayInquiryRawResult,
+  IDPayRawError,
+  IDPayVerifyRawResult,
+  IDriverClient,
+  IinquiryPaymentRequired,
+  IVerifyPaymentRequired,
+  IVerifyPaymentResult,
+} from "../../types";
+import { IPGBaseError } from "../../structures/errors";
 import axios, { AxiosError } from "axios";
-import { IDPay as IDPayTypes } from "../../types"
-import ErrorCodes from "./Errors";
-import TransCodes from "./TransactionCodes";
 
-export class IDPay {
+export class IDPayDriver extends BaseClient<
+  ICreatePaymentRequired & ICreatePaymentOptional,
+  IDPayVerifyRawResult,
+  IDPayInquiryRawResult
+> {
+  constructor(
+    token: string,
+    headerOpts: Record<string, string> = {},
+    baseURL = "https://api.idpay.ir/v1.1",
+    isSandbox = false,
+  ) {
+    super(baseURL, token, headerOpts, isSandbox);
+    this.sandbox(isSandbox);
+  }
 
-    /**
-    * All Transactions Codes and their Meaning
-    */
-    TransactionCodes = TransCodes;
+  sandbox(
+    on: boolean,
+  ): ThisType<
+    IDriverClient<
+      ICreatePaymentRequired & ICreatePaymentOptional,
+      IDPayVerifyRawResult,
+      Record<string, unknown>
+    >
+  > {
+    if (on) this.addHeader("X-SANDBOX", "1", true);
+    else this.addHeader("X-SANDBOX", "0", true);
 
-      /**
-     * All Error Codes and Their Meaning
-     */
-    Errors = ErrorCodes;
+    return this;
+  }
 
-    readonly apiUrl: string
+  async createPayment(
+    opts: ICreatePaymentRequired & ICreatePaymentOptional,
+  ): Promise<ICreatePaymentResult> {
+    const { orderId, amount, callback_url, name, phone, mail } = opts;
+    const idpayObj: _IDPayRawCreatePaymentObject = {
+      order_id: orderId,
+      amount: BigNumber(amount).toNumber(),
+      callback: callback_url,
+    };
+    if (name) idpayObj.name = name;
+    if (phone) idpayObj.phone = phone;
+    if (mail) idpayObj.mail = mail;
 
-    private Request
+    try {
+      const result = await this.http.post<_IDPayRawCreatePaymentResult>(
+        "/payment",
+        idpayObj,
+      );
+      if (result.status === 200 || result.status === 201)
+        return this.toCreatePaymentResult(result.data);
+      else
+        throw new IPGBaseError(
+          (result.data as unknown as IDPayRawError).error_message,
+          (result.data as unknown as IDPayRawError).error_code,
+        );
+    } catch (error) {
+      if (!axios.isAxiosError(error)) throw error;
 
-    constructor(private readonly token: string, readonly version = "v1.1")
-    {
-        this.Request = axios
-        this.apiUrl = `https://api.idpay.ir/${version}/`
+      const err: AxiosError<IDPayRawError> = error;
+      if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
+
+      throw new IPGBaseError(
+        err.response.data.error_message,
+        err.response.data.error_code,
+      );
     }
+  }
 
-    /**
-    * @param {Boolean} sandbox Enable Sandbox or not
-    * @returns {IDPayHeader}
-    * @private
-    */
-    private GetHeader(sandbox = false)
-    {
-        return {
-            'X-API-KEY': this.token,
-            'X-SANDBOX': sandbox ?? false
-        };
+  async verifyPayment(
+    opts: IVerifyPaymentRequired,
+  ): Promise<IVerifyPaymentResult<IDPayVerifyRawResult>> {
+    const { authorityId, orderId } = opts;
+
+    const idpayObj: _IDPayRawVerifyPaymentObject = {
+      id: authorityId,
+      order_id: orderId,
+    };
+    try {
+      const result = await this.http.post<IDPayVerifyRawResult>(
+        "/payment/verify",
+        idpayObj,
+      );
+
+      if (result.status === 200 || result.status === 201)
+        return this.toVerifyPaymentResult(result.data);
+      else
+        throw new IPGBaseError(
+          (result.data as unknown as IDPayRawError).error_message,
+          (result.data as unknown as IDPayRawError).error_code,
+        );
+    } catch (error) {
+      if (!axios.isAxiosError(error)) throw error;
+
+      const err: AxiosError<IDPayRawError> = error;
+      if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
+
+      throw new IPGBaseError(
+        err.response.data.error_message,
+        err.response.data.error_code,
+      );
     }
+  }
 
-    /**
-    * Create a Payment
-    * @param {string} id ID of Order/Payment - 50 Length at the Must
-    * @param {number} amount Money Amount that you want in IRR (Rial)
-    * @param {IDPayTypes.Options} params Some Params that are optional
-    * @returns {Promise<IDPayTypes.CreatePaymentSucces>} Whatver the axios would return
-    */
-    async CreatePayment(id: string, amount: number, params: IDPayTypes.Options): Promise<IDPayTypes.CreatePaymentSucces>
-    {
+  async inquiryPayment(
+    opts: IinquiryPaymentRequired,
+  ): Promise<BasePaymentStatus<IDPayInquiryRawResult>> {
+    const { authorityId, orderId } = opts;
 
-        if(!id || id == '' || id == ' ' || typeof id !== 'string' || id.length > 50)
-            throw new Error(`ID is Invalid.`);
+    const idpayObj: _IDPayRawInquiryObject = {
+      id: authorityId,
+      order_id: orderId,
+    };
 
-        if(!amount || typeof amount !== 'number' || amount == 0 || amount > 500000000 || amount < 1000)
-            throw new Error(`Amount number is Invalid.`);
+    try {
+      const result = await this.http.post<IDPayInquiryRawResult>(
+        "/payment/inquiry",
+        idpayObj,
+      );
 
-        const paymentObject: IDPayTypes.RequestOptions = {
-            order_id: id,
-            amount,
-            name: params.name,
-            callback: params.callback,
-        };
+      if (result.status === 200 || result.status === 201)
+        return this.toInquiryResult(result.data);
+      else
+        throw new IPGBaseError(
+          (result.data as unknown as IDPayRawError).error_message,
+          (result.data as unknown as IDPayRawError).error_code,
+        );
+    } catch (error) {
+      if (!axios.isAxiosError(error)) throw error;
 
-        const sandBox = ('sandbox' in params && typeof params['sandbox'] == 'boolean') ? params['sandbox'] : false;
+      const err: AxiosError<IDPayRawError> = error;
+      if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
 
-        try {
-            const response = await this.Request.post<IDPayTypes.CreatePaymentSucces>(`/payment`, paymentObject, { headers: this.GetHeader(sandBox), baseURL: this.apiUrl });
-            const data = response.data
-            if('error_code' in data)
-                throw new Error(`IDPay Error: ${data.error_code} - ${data.error_message}`);
-
-            return data;
-        } catch (error) {
-            const e: AxiosError<IDPayTypes.IDPayError> = error as AxiosError<IDPayTypes.IDPayError>
-            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message}`);
-        }
+      throw new IPGBaseError(
+        err.response.data.error_message,
+        err.response.data.error_code,
+      );
     }
+  }
 
-    /**
-    * Verify a Created Payment (or the Callback)
-    * @param {string} recivedID ID That you recived after Creating a payment with `CreatePayment` Method
-    * @param {string} createdID ID That you sent for Creating a Payment with `CreatePayment` Method
-    * @param {boolean} sandBox Send The Request as a SandBox Request
-    * @returns {Promise<IDPayTypes.VerifyPaymentSucces>} Whatver the axios would return
-    */
-    async VerifyPayment(recivedID: string, createdID: string, sandBox = false): Promise<IDPayTypes.VerifyPaymentSucces>
-    {
+  toCreatePaymentResult(
+    raw: _IDPayRawCreatePaymentResult,
+  ): ICreatePaymentResult {
+    return {
+      authorityId: raw.id,
+      redirectUrl: raw.link,
+    };
+  }
 
-        if(!recivedID || typeof recivedID !== 'string')
-            throw new Error(`RecivedID is invalid.`);
-        if(!createdID || typeof createdID !== 'string')
-            throw new Error(`CreatedID is invalid.`);
+  toVerifyPaymentResult(
+    raw: IDPayVerifyRawResult,
+  ): IVerifyPaymentResult<IDPayVerifyRawResult> {
+    return {
+      status:
+        raw.status === "200" || raw.status === "101" || raw.status === "100"
+          ? "verified"
+          : raw.status === "10"
+          ? "paid"
+          : raw.status === "1" || raw.status === "5" || raw.status === "8"
+          ? "pending"
+          : raw.status === "7" || raw.status === "6" || raw.status === "4"
+          ? "reversed"
+          : "failed",
+      statusCode: raw.status as string,
+      card:
+        raw.status === "200" || raw.status === "100" || raw.status === "101"
+          ? raw.payment.card_no
+          : undefined,
+      cardHash:
+        raw.status === "200" || raw.status === "100" || raw.status === "101"
+          ? raw.payment.hashed_card_no
+          : undefined,
+      raw,
+    };
+  }
 
-        try {
-            const response = await this.Request.post<IDPayTypes.VerifyPaymentSucces>(`/payment/verify`, { id: recivedID, order_id: createdID }, { headers: this.GetHeader(sandBox), baseURL: this.apiUrl })
-            const data = response.data
-
-            if('error_code' in data)
-                throw new Error(`IDPay Error: ${data.error_code} - ${data.error_message}`);
-        
-            return data;
-        } catch (error) {
-            const e: AxiosError<IDPayTypes.IDPayError> = error as AxiosError<IDPayTypes.IDPayError>
-            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message}`);
-        }
-    }
-
-    /**
-    * Get Status of a Created Payment
-    * @param {string} recivedID ID That you recived after Creating a payment with `CreatePayment` Method
-    * @param {string} createdID ID That you sent for Creating a Payment with `CreatePayment` Method
-    * @param {boolean} sandBox Send The Request as a SandBox Request
-    * @returns {Promise<unknown>} Whatver the axios would return
-    */
-    async PaymentStatus(recivedID: string, createdID: string, sandBox = false): Promise<IDPayTypes.PaymentStatusSuccess>
-    {
-
-        if(!recivedID || typeof recivedID !== 'string')
-            throw new Error(`RecivedID is invalid.`);
-        if(!createdID || typeof createdID !== 'string')
-            throw new Error(`CreatedID is invalid.`);
-
-        try {
-            const response = await this.Request.post(`/payment/inquiry`, {
-                    id: recivedID,
-                    order_id: createdID
-                },
-                {
-                    headers: this.GetHeader(sandBox),
-                    baseURL: this.apiUrl
-                });
-            const data = response.data
-
-            return data;
-        } catch (error) {
-            const e: AxiosError<IDPayTypes.IDPayError> = error as AxiosError<IDPayTypes.IDPayError>
-            throw new Error(`IDPay Error: ${e.response.data.error_code} - ${e.response.data.error_message} - ${this.GetError(e.response.status.toString(), e.response.data.error_code.toString())}`);
-        }
-    }
-
-    /**
-    * Get Transaction Message by Code
-    * @param {string} code Transaction Code
-    * @returns {string} Message in Persian
-    */
-    GetMessage(code: string)
-    {
-        return this.TransactionCodes[code as keyof typeof this.TransactionCodes];
-    }
-
-    /**
-    * Get Error Message
-    * @param {string} statusCode StatusCode that would be in the Response Header (such as 200, 404, ....)
-    * @param {string} errorCode Error code that you would recive in the callback from IDPay (a random number)
-    * @returns {string} Message in Persian
-    */
-    GetError(statusCode: string, errorCode: string)
-    {
-        // eslint-disable-next-line
-        // @ts-ignore
-        return this.Errors[statusCode as keyof typeof this.Errors][errorCode as keyof typeof this.Errors];
-    }
+  toInquiryResult(
+    raw: IDPayInquiryRawResult,
+  ): BasePaymentStatus<IDPayInquiryRawResult> {
+    return {
+      status:
+        raw.status === "200" || raw.status === "101" || raw.status === "100"
+          ? "verified"
+          : raw.status === "10"
+          ? "paid"
+          : raw.status === "1" || raw.status === "5" || raw.status === "8"
+          ? "pending"
+          : raw.status === "7" || raw.status === "6" || raw.status === "4"
+          ? "reversed"
+          : "failed",
+      statusCode: raw.status as string,
+      raw,
+    };
+  }
 }
