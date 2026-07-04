@@ -27,9 +27,9 @@ export class IDPayDriver extends BaseClient<
 > {
   constructor(
     token: string,
+    isSandbox = false,
     headerOpts: Record<string, string> = {},
     baseURL = "https://api.idpay.ir/v1.1",
-    isSandbox = false,
   ) {
     super(baseURL, token, headerOpts, isSandbox);
     this.sandbox(isSandbox);

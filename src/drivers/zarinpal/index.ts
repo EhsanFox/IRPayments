@@ -27,9 +27,9 @@ export class ZarinpalDriver extends BaseClient<
 > {
   constructor(
     token: string,
+    isSandbox = false,
     headerOpts: Record<string, string> = {},
     baseURL = "https://payment.zarinpal.com/pg/v4/payment",
-    isSandbox = false,
   ) {
     super(baseURL, token, headerOpts, isSandbox);
     this.sandbox(isSandbox);

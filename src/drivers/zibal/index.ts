@@ -28,9 +28,9 @@ export class ZibalDriver extends BaseClient<
 > {
   constructor(
     token: string,
+    isSandbox = false,
     headerOpts: Record<string, string> = { "Content-Type": "application/json" },
     baseURL = "https://gateway.zibal.ir/",
-    isSandbox = false,
     private isLazyMode = true,
   ) {
     super(baseURL, token, headerOpts, isSandbox);
