@@ -56,15 +56,30 @@ export class ZarinpalDriver extends BaseClient<
   }
 
   async createPayment(
-    opts: ICreatePaymentRequired & ICreatePaymentOptional,
+    opts: ICreatePaymentRequired &
+      ICreatePaymentOptional & {
+        currency?: "IRR" | "IRT";
+        referrer_id?: string;
+      },
   ): Promise<ICreatePaymentResult> {
-    const { orderId, amount, callback_url, phone, mail, description } = opts;
+    const {
+      orderId,
+      amount,
+      callback_url,
+      phone,
+      mail,
+      description,
+      currency,
+      referrer_id,
+    } = opts;
     const zpObj: _ZPRawCreatePaymentObject = {
       order_id: orderId,
       amount: BigNumber(amount).toNumber(),
       callback_url: callback_url,
       description: description ?? this.getDescription(),
       merchant_id: this.getToken(),
+      currency: currency ?? "IRR",
+      referrer_id: referrer_id ?? "",
     };
     if (phone) {
       if (!zpObj.metadata) zpObj.metadata = {};

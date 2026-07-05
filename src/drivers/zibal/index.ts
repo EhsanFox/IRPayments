@@ -17,6 +17,7 @@ import {
   ZBCreatePaymentStatusCodes,
   ZBVerifyResultCodes,
   _ZBInquiryObject,
+  MultiplexingInfo,
 } from "../../types";
 import { IPGBaseError } from "../../structures/errors";
 import axios, { AxiosError } from "axios";
@@ -47,15 +48,42 @@ export class ZibalDriver extends BaseClient<
   }
 
   async createPayment(
-    opts: ICreatePaymentRequired & ICreatePaymentOptional,
+    opts: ICreatePaymentRequired &
+      ICreatePaymentOptional & {
+        allowedCards?: string[];
+        checkMobileWithCard?: boolean;
+        description?: string;
+        feeMode?: number;
+        multiplexingInfos?: MultiplexingInfo[];
+        nationalCode?: string;
+        percentMode?: number;
+      },
   ): Promise<ICreatePaymentResult> {
-    const { amount, callback_url, phone } = opts;
+    const {
+      amount,
+      callback_url,
+      phone,
+      allowedCards,
+      checkMobileWithCard,
+      description,
+      feeMode,
+      orderId,
+      percentMode,
+      multiplexingInfos,
+    } = opts;
     const zbObj: _ZBCreatePaymentObject = {
       amount: BigNumber(amount).toNumber(),
       callbackUrl: callback_url,
       merchant: this.getToken(),
+      orderId: orderId,
     };
     if (phone) zbObj.mobile = phone;
+    if (allowedCards) zbObj.allowedCards = allowedCards;
+    if (checkMobileWithCard) zbObj.checkMobileWithCard = checkMobileWithCard;
+    if (description) zbObj.description = description;
+    if (feeMode) zbObj.feeMode = feeMode;
+    if (percentMode) zbObj.percentMode = percentMode;
+    if (multiplexingInfos) zbObj.multiplexingInfos = multiplexingInfos;
 
     try {
       const result = await this.http.post<_ZBCreatePaymentRawResult>(
