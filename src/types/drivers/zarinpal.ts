@@ -94,7 +94,13 @@ export interface ZPVerifyRawResult extends Record<string, unknown> {
     fee_type: "Merchant" | string;
     fee: number;
   };
-  errors: string[];
+  errors:
+    | string[]
+    | {
+        message: string;
+        code: number;
+        validations: unknown[];
+      };
 }
 
 export interface ZPInquiryRawResult extends Record<string, unknown> {
@@ -103,7 +109,13 @@ export interface ZPInquiryRawResult extends Record<string, unknown> {
     code: ZPStatusCodes;
     message: string;
   };
-  errors: string[];
+  errors:
+    | string[]
+    | {
+        message: string;
+        code: number;
+        validations: unknown[];
+      };
 }
 
 export interface _ZPRawCreatePaymentObject {
@@ -132,7 +144,13 @@ export interface _ZPCreatePaymentRawResult {
     fee_type: string;
     fee: number;
   };
-  errors: string[];
+  errors:
+    | string[]
+    | {
+        message: string;
+        code: number;
+        validations: unknown[];
+      };
 }
 
 export interface _ZPVerifyPaymentObject {
