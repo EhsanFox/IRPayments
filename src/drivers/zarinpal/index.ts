@@ -101,7 +101,7 @@ export class ZarinpalDriver extends BaseClient<
         return this.toCreatePaymentResult(result.data);
       else
         throw new IPGBaseError(
-          result.data.errors.toString(),
+          result.data.errors.join(","),
           result.data.data.code,
         );
     } catch (error) {
@@ -111,7 +111,7 @@ export class ZarinpalDriver extends BaseClient<
       if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
 
       throw new IPGBaseError(
-        err.response.data.errors.toString(),
+        err.response.data.errors.join(","),
         err.response.data.data.code,
       );
     }
@@ -137,7 +137,7 @@ export class ZarinpalDriver extends BaseClient<
         return this.toVerifyPaymentResult(result.data);
       else
         throw new IPGBaseError(
-          result.data.errors.toString(),
+          result.data.errors.join(","),
           result.data.data.code,
         );
     } catch (error) {
@@ -147,7 +147,7 @@ export class ZarinpalDriver extends BaseClient<
       if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
 
       throw new IPGBaseError(
-        err.response.data.errors.toString(),
+        err.response.data.errors.join(","),
         err.response.data.data.code,
       );
     }
@@ -173,7 +173,7 @@ export class ZarinpalDriver extends BaseClient<
         return this.toInquiryResult(result.data);
       else
         throw new IPGBaseError(
-          result.data.errors.toString(),
+          result.data.errors.join(","),
           result.data.data.code,
         );
     } catch (error) {
@@ -183,7 +183,7 @@ export class ZarinpalDriver extends BaseClient<
       if (!err.response) throw new IPGBaseError(err.message, err.code ?? 500);
 
       throw new IPGBaseError(
-        err.response.data.errors.toString(),
+        err.response.data.errors.join(","),
         err.response.data.data.code,
       );
     }
