@@ -2,6 +2,7 @@ import { Drivers } from "../src";
 
 const myIdPay = new Drivers.ZarinpalDriver(
   "00ca5b0a-2f73-4a37-a0c9-86719d084123",
+  true,
 );
 
 (async () => {

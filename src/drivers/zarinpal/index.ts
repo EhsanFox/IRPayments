@@ -44,15 +44,16 @@ export class ZarinpalDriver extends BaseClient<
       Record<string, unknown>
     >
   > {
-    if (on) this.rebuildHTTP("https://sandbox.zarinpal.com/");
+    if (on) this.rebuildHTTP("https://sandbox.zarinpal.com/pg/v4/payment");
     else this.rebuildHTTP();
 
     return this;
   }
 
   public getToken(): string {
-    if (this.isSandbox) return randomUUID();
-    else return this.token;
+    //if (this.isSandbox) return randomUUID();
+    // else
+    return this.token;
   }
 
   async createPayment(
