@@ -204,7 +204,7 @@ export class ZarinpalDriver extends BaseClient<
   toCreatePaymentResult(raw: _ZPCreatePaymentRawResult): ICreatePaymentResult {
     return {
       authorityId: raw.data.authority,
-      redirectUrl: `https://${this.isSandbox ? "sandbox" : "payment"}.zarinpal.com/pg/StartPay/${raw.data.authority}`,
+      redirectUrl: `https://payment.zarinpal.com/pg/StartPay/${raw.data.authority}`,
     };
   }
 
