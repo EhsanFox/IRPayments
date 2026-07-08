@@ -1,6 +1,5 @@
 import BigNumber from "bignumber.js";
 import { BaseClient } from "../../structures/client";
-import { randomUUID } from "node:crypto";
 import {
   BasePaymentStatus,
   ICreatePaymentOptional,
